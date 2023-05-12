@@ -1,0 +1,308 @@
+#include <GLFW/glfw3.h>
+#include <Windows.h>
+#include <iostream>
+#include <ctime>
+#include <math.h>
+using namespace std;
+
+float theta = 0.0f, xAlfa=20;
+
+
+enum Direction {
+	LEFT,
+	RIGHT,
+
+};
+
+float prism[] = {
+	-0.1,0,0.5,
+	-0.1,0.3,0.5,
+
+	-0.1,0.3,0.5,
+	0.1,0.3,0.5,
+
+	0.1,0.3,0.5,
+	0.1,0,0.5,
+
+	0.1,0,0.5,
+	-0.1,0,0.5,
+
+	-0.1,0,0.5,
+	0,0.1,0,
+
+	0,0.1,0,
+	0.1,0,0.5,
+
+	0,0.1,0,
+	0,0.4,0,
+
+	0,0.4,0,
+	-0.1,0.3,0.5,
+
+	0,0.4,0,
+	0.1,0.3,0.5,
+
+
+
+};
+
+float pyramid[] = { 0,0,2, 1,1,0, 1,-1,0, -1,-1,0, -1,1,0, 1,1,0 };
+float vert[] = { 1,1,0, 1,-1,0, -1,-1,0, -1,1,0 }; 
+
+
+void display() 
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	glVertexPointer(3, GL_FLOAT, 0, &pyramid);
+	glColor3f(1, 0, 0);
+	glDrawArrays(GL_TRIANGLE_FAN,0,6);
+
+	glDrawArrays(GL_LINES, 0, 50);
+}
+
+void ShowWorld()
+{
+	glEnableClientState(GL_VERTEX_ARRAY);
+	  glVertexPointer(3, GL_FLOAT, 0, &vert);
+	  glColor3f(0, 0.5, 0);
+	  glDrawArrays(GL_TRIANGLE_FAN,0,4);
+	glDisableClientState(GL_VERTEX_ARRAY);
+
+}
+
+void MoveCamera() {
+	glTranslatef(0, 0, -3);
+	
+ 
+
+
+}
+
+
+POINTFLOAT cross[] = {
+{-0.1, 0.3},
+{0.1, 0.3},
+{0.1, 0.3},
+{0.1, 0.1},
+{0.1, 0.1},
+{0.3, 0.1},
+{0.3, 0.1},
+{0.3, -0.1},
+{0.3, -0.1},
+{0.1, -0.1},
+{0.1, -0.1},
+{0.1, -0.3},
+{0.1, -0.3},
+{-0.1, -0.3},
+{-0.1, -0.3},
+{-0.1, -0.1},
+{-0.1, -0.1},
+{-0.3, -0.1},
+{-0.3, -0.1},
+{-0.3, 0.1},
+{-0.3, 0.1},
+{-0.1, 0.1},
+{-0.1, 0.1},
+{-0.1, 0.3},//24
+{0.1,0.3},
+{0,0.4},
+{0,0.4},
+{-0.2,0.4},
+{-0.2,0.4},
+{-0.1,0.3},
+{-0.2,0.4},
+{-0.2,0.2},//32
+{-0.2,0.2},
+{-0.1,0.1},
+{-0.2,0.2},
+{-0.4,0.2},
+{-0.4,0.2},
+{-0.3,0.1},
+{-0.4,0.2},
+{-0.4,0},
+{-0.4,0},
+{-0.3,-0.1},
+{-0.1, -0.3},
+{-0.2,-0.2},
+{-0.2,-0.2},
+{-0.2,-0.1},
+{0.3,0.1},
+{0.2,0.2},
+{0.2,0.2},
+{0.1,0.2},
+{0, -0.2},//50
+{0.1,-0.3},
+{0, -0.2},
+{-0.2,-0.2},
+{0, -0.2},
+{0,0},
+{0,0},
+{0.2,0},
+{0.2,0},
+{0.3,-0.1},//60
+{0.1,-0.1},
+{0,0},
+{0,-0.2},
+{-0.2,-0.2},
+{0.2,0},
+{0.2,0.2},
+{-0.2,-0.1},
+{-0.2,0},
+{ -0.2,0 },
+{-0.4,0},
+{-0.1,-0.1},
+{-0.2,0},
+{0.1,0.1},
+{0,0.2},
+{0.1,0.2},
+{0,0.2},
+{ 0,0.2 },
+{0,0.4},//78
+};
+
+
+void ShowObj()
+{
+	glLineWidth(2);
+	glVertexPointer(2, GL_FLOAT, 0, &cross);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	//glColor3f(0, 1, 1);
+	glDisable(GL_LINE_STIPPLE);
+
+	glDrawArrays(GL_LINES, 0, 50);
+	glEnable(GL_LINE_STIPPLE);
+
+	glLineStipple(1, 0X00FF);
+
+	glDrawArrays(GL_LINES, 50, 69);
+
+
+	glEnd();
+
+
+}
+
+
+
+void fig50() {
+	//srand(time(0));
+	float d, s, a, r;
+	for (int i = 0; i < 49; i++) {//         зробити 50 фігур з різними початковими координатами
+
+		d = rand() % 61 + (-30);
+		s = rand() % 61 + (-30);
+		
+
+		a = d / 10;
+		r = s / 10;
+		if (i % 2 == 0) {
+			a = -a;
+			r = -r;
+		}
+
+
+		glLoadIdentity();
+		glScalef(0.4, 0.4, 0);
+		glColor3f(abs(a), abs(r), abs(r));
+		glTranslatef(a, r, 0);
+
+
+		ShowObj();
+
+
+	}
+
+
+}
+
+void ShapeInShape() {
+	float x=0.3;//                         фігура в фігурі
+	for (int i = 0; i < 5; i++) {
+		glLoadIdentity();
+		glScalef(x, x, 0);
+		ShowObj();
+		x += 0.3;
+	}
+
+
+}
+
+
+
+
+
+
+
+int main(void)
+{
+	
+	GLFWwindow* window;
+	
+	glfwInit();
+	if (!glfwInit())
+		return -1;
+
+	
+	window = glfwCreateWindow(800, 800, "just making shapes", NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+
+	}
+	
+	
+
+	float move = 0.0f;
+	Direction direction = RIGHT;
+	
+	glfwMakeContextCurrent(window);
+	
+	srand(time(NULL));
+	glEnable(GL_DEPTH_TEST);
+	//glFrustum(-1,1,-1,1,2,8);
+	while (!glfwWindowShouldClose(window))
+	{
+
+		glClearColor(0.1f, 0.17f, 0.3f, 0.43f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+
+		glPushMatrix();
+		
+		display();
+	
+		glPopMatrix();
+		
+		
+		
+
+		glfwSwapBuffers(window);
+		
+		theta += 0.01;
+		if (direction == RIGHT) {
+			move += 0.001;
+		}
+		else if (direction == LEFT) {
+			move -= 0.001;
+		}
+		if (move >= 0.7) {
+			direction = LEFT;
+		}
+		if (move <= -0.6) {
+			direction = RIGHT;
+		}
+		
+		
+		
+		glfwPollEvents();
+		
+		
+	}
+
+	
+	glfwTerminate();
+	return 0;
+}

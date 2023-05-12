@@ -1,0 +1,14 @@
+﻿  4lab.cpp
+c:\program files (x86)\windows kits\10\include\10.0.17763.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  d:\volandemort\hehe_figyru\hehe_figyru\include\glfw\glfw3.h(123): note: see previous definition of 'APIENTRY'
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(55): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(56): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(69): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(92): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(93): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(118): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(124): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(632): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(643): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\volandemort\hehe_figyru\hehe_figyru\4lab.cpp(690): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  HEHE_FIGYRU.vcxproj -> D:\VOLANDEMORT\HEHE_FIGYRU\x64\Debug\HEHE_FIGYRU.exe
